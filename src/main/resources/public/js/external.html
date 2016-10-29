@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Sistema Clínico</title>
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+    <link rel="stylesheet" href="webjars/angular-material/0.10.1/angular-material.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body ng-app="gateway">
+	<div ng-controller="LoginCtrl as vm" layout="column" ng-cloak class="ng-cloak" flex>
+	    <md-toolbar class="md-whiteframe-z1">
+	    	<div class="md-toolbar-tools">
+	    		<h2>
+		            <span>Sistema Clínico</span>
+		        </h2>	
+		        <span flex></span>
+	    	</div>
+	    </md-toolbar>
+	    <md-content class="md-padding grey-background" layout="row" layout-align="center center">
+	        <md-card flex="50" flex-sm="100" class="card-white">
+	            <md-card-content>
+	                <h2>Acesso ao Sistema</h2>
+                    <form name="loginForm" ng-submit="login(loginForm.$valid)" novalidate="novalidate">
+                        <div>
+                            <md-input-container>
+                                <label>Nome de Usuário</label> 
+                                <input ng-model="credentials.username"
+									name="username" type="text" required autofocus="autofocus">
+                                <div ng-messages="loginForm.username.$error" ng-show="loginForm.username.$touched">
+                                	<div ng-message="required">Campo de preenchimento obrigatório.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div>
+                            <md-input-container>
+                                <label>Senha</label>
+                                <input type="password" ng-model="credentials.password" id="password" name="password" required>
+                                <div ng-messages="loginForm.password.$error" ng-show=loginForm.password.$dirty>
+                                	<div ng-message="required">Campo de preenchimento obrigatório.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div layout="column" layout-align="center center" class="g-recaptcha" data-sitekey="6LeXZQUTAAAAALeqkIZANI1MJh3UNJd-Y_Si9V20"></div>
+                        <div layout="column" layout-align="center center" ng-show="recaptcha.required" class="login-error">
+                        	<p>Por favor, preencha corretamente o campo reCaptcha.</p>
+                        </div>
+                        <div layout="column" layout-align="center center" ng-show="recaptcha.fail" class="login-error">
+                        	<p>Falha na autenticação, por favor, tente mais tarde.</p>
+                        </div>
+                        <div layout="column" layout-align="center center" ng-show="recaptcha.invalid" class="login-error">
+                        	<p>Falha na autenticação, por favor, verifique usuário e senha.</p>
+                        </div>                        
+                        <div layout="row" layout-align="end">
+	                        <md-button type="submit" class="md-primary" ng-disabled="loginForm.$invalid">Entrar</md-button>
+                        </div>
+                    </form>
+	            </md-card-content>
+	        </md-card>
+	    </md-content>
+	    
+	</div>
+	
+	<!-- angular dependencies -->
+	<script src="webjars/angular/1.4.5/angular.js"></script>
+	<script src="webjars/angular-aria/1.4.5/angular-aria.min.js"></script>
+	<script src="webjars/angular-animate/1.4.5/angular-animate.min.js"></script>
+	<script src="webjars/angular-resource/1.4.5/angular-resource.min.js"></script>
+	<script src="webjars/angular-messages/1.4.5/angular-messages.min.js"></script>
+	<script src="webjars/angular-material/0.10.1/angular-material.min.js"></script>
+	
+	<!-- application files -->
+	<script src="gateway.module.js" type="text/javascript"></script>
+	<script src="gateway.config.js" type="text/javascript"></script>
+	<script src="gateway.controller.js" type="text/javascript"></script>
+	<!-- 	<script src="https://www.google.com/recaptcha/api.js"></script> -->
+	
+	
+</body>
+</html>

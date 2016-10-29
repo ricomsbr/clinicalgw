@@ -1,0 +1,1 @@
+package br.com.ackta.clinicalgw.security.ldap;

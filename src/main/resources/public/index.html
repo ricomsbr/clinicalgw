@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Sistema Clínico</title>
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+    <link rel="stylesheet" href="webjars/angular-material/1.1.1/angular-material.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body ng-app="gateway" ng-cloak class="ng-cloak">
+	<div ng-controller="GatewayCtrl as vm" layout="column" flex>
+	    <md-toolbar class="md-whiteframe-z1">
+	    	<div class="md-toolbar-tools c-site-navbar">
+	    		<h2>Sistema Clínico</h2>
+	    	</div>
+	    </md-toolbar>
+	    <md-content class="md-padding" layout="row" layout-align="center center">
+	        <md-card flex-gt-md="30" flex-sm>
+	            <md-card-content>
+	                <h2 style="text-align:center;">Acesso ao Sistema</h2>
+                    <form name="loginForm" ng-submit="vm.login(loginForm.$valid)" novalidate="novalidate">
+                        <div>
+                            <md-input-container class="md-block" flex>
+                                <label>Nome de Usuário</label> 
+                                <input ng-model="vm.credentials.username"
+									name="username" type="text" required autofocus="autofocus">
+                                <div ng-messages="loginForm.username.$error" ng-show="loginForm.username.$touched">
+                                	<div ng-message="required">Campo de preenchimento obrigatório.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div>
+                            <md-input-container class="md-block" flex>
+                                <label>Senha</label>
+                                <input type="password" ng-model="vm.credentials.password" id="password" name="password" required>
+                                <div ng-messages="loginForm.password.$error" ng-show=loginForm.password.$touched>
+                                	<div ng-message="required">Campo de preenchimento obrigatório.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="end">
+	                        <md-button type="submit" class="md-primary" ng-disabled="loginForm.$pristine || loginForm.$invalid">Entrar</md-button>
+                        </div>
+                    </form>
+                    
+	            </md-card-content>
+	        </md-card>
+	    </md-content>
+	    
+	</div>
+	
+	<!-- angular dependencies -->
+	<script src="webjars/angular/1.5.8/angular.js"></script>
+	<script src="webjars/angular-aria/1.5.8/angular-aria.min.js"></script>
+	<script src="webjars/angular-animate/1.5.8/angular-animate.min.js"></script>
+	<script src="webjars/angular-resource/1.5.8/angular-resource.min.js"></script>
+	<script src="webjars/angular-messages/1.5.8/angular-messages.min.js"></script>
+	<script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
+	
+	<!-- application files -->
+	<script src="js/gateway.module.js" type="text/javascript"></script>
+	<script src="js/gateway.config.js" type="text/javascript"></script>
+	<script src="js/auth.service.js" type="text/javascript"></script>
+	<script src="js/gateway.controller.js" type="text/javascript"></script>
+	
+</body>
+</html>

@@ -1,0 +1,69 @@
+
+  
+logging:
+  level:
+    org.springframework.web: INFO
+    org.springframework.security: DEBUG
+    com.hazelcast: INFO
+    org.springframework.session: INFO
+    br.com.ackta.clinicalgw: INFO
+  file: clinicalgw.log
+  
+security:
+  sessions: always            
+
+zuul:
+  routes:
+      ui:
+        url: http://localhost:9052
+      resource:
+        path: /resource/**
+        url: http://localhost:9051
+  sensitive-headers:
+
+cluster:
+  group:
+    name: desenv
+
+app:
+  proxy:
+    host: fapis04.ackta.com.br
+    port: 8080
+  recaptcha:
+    url: https://www.google.com/recaptcha/api/siteverify
+    key: 6LeXZQUTAAAAAKkj1e-wbOwtFqiFhGmv-C3FqPjh
+  ldap:
+    domain: ackta.local
+    url: ldap://ackta.local:389
+    
+spring:
+  profiles:
+    active: development,oracle
+  jpa:
+    show-sql: false
+    generate-ddl: false
+
+---
+
+spring:
+  profiles: tests
+  session:
+    store-type: none
+  datasource:
+    url: jdbc:h2:mem:mydb;INIT=CREATE SCHEMA IF NOT EXISTS dap;DB_CLOSE_ON_EXIT=FALSE;Mode=Oracle;
+  jpa: 
+    database-platform: org.hibernate.dialect.Oracle10gDialect
+        
+---
+
+spring:
+  profiles: oracle
+  datasource:
+    url: jdbc:oracle:thin:@carrera.ackta.com.br:1521:dapteste
+    username: reservas
+    password: reservas
+    driver-class-name: oracle.jdbc.OracleDriver       
+    tomcat:
+      max-active: 5
+      min-idle: 1
+  
